@@ -142,6 +142,10 @@ matrix:
           compiler: clang
           dist: trusty
           env: T=tidy
+        - os: linux
+          compiler: clang
+          dist: trusty
+          env: T=debug CFLAGS="-fsanitize=address,undefined,signed-integer-overflow -fno-sanitize-recover=undefined,integer -Wformat -Werror=format-security -Werror=array-bounds -g" LDFLAGS="-fsanitize=address,undefined -fno-sanitize-recover=undefined,integer" LIBS="-ldl -lubsan"
 
 install:
   - if [ "$T" = "coverage" ]; then pip2 install --user cpp-coveralls; fi
